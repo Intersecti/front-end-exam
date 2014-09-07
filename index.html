@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>front-end-exam</title>
+	<link rel="stylesheet" href="libs/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="libs/bootstrap/css/bootstrap-theme.css">
+
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body ng-app="app">
+	
+	<div class="container main-container" ng-controller="IndexController" data-ng-init="list()">
+		<div>
+			<ul class="list-group">
+
+				<li class="list-group-item" ng-repeat="mission in missions">
+					<div class="panel panel-default">
+						<div class="panel-heading">{{ mission.title }}</div>
+
+						<div class="panel-body">
+							{{ mission.description }}
+						</div>
+
+						<div class="panel-footer clearfix">
+        					<div class="pull-right">
+								<span class="btn btn-info" ng-click="missionDetail(mission)">
+									<i class="glyphicon glyphicon-info-sign"></i> 
+									Detalhes
+								</span>
+							</div>
+						</div>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="missionModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span>
+							<span class="sr-only">Fechar</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							#{{ detailedMission.id }} - {{ detailedMission.title }}
+						</h4>
+					</div>
+					<div class="modal-body">
+						<h5 class="created_at">
+							{{ detailedMission.created_at | date: 'dd/MM/yyyy h:mm' }}
+						</h5>
+
+						<div class="panel">
+							<label>Descrição:</label>
+							<p>{{ detailedMission.description }}</p>
+						</div>
+
+						<div class="panel">
+							<label>Latitude:</label>
+							<p>{{ detailedMission.latitude }}</p>
+						</div>
+
+						<div class="panel">
+							<label>Logintude:</label>
+							<p>{{ detailedMission.longitude }}</p>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="loading" style="display: none" />
+
+	<script src="libs/jquery/jquery-1.11.1.min.js"></script>
+	<script src="libs/bootstrap/js/bootstrap.min.js"></script>
+	<script src="libs/angularjs/angular.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controllers/IndexController.js"></script>
+</body>
+</html>
